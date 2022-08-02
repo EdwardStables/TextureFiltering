@@ -119,9 +119,15 @@ void Texture::generateMMs(olc::PixelGameEngine &pge){
     while (MipMaps.back()->width >= 2 && MipMaps.back()->height >=2){
         olc::Sprite* nsp = new olc::Sprite(MipMaps.back()->width/2, MipMaps.back()->height/2);
         pge.SetDrawTarget(nsp);
-        for (int v = 0; v < nsp->height; v++)
-            for (int u = 0; u < nsp->width; u++)
-                pge.Draw({u, v}, MipMaps.back()->GetPixel({u*2, v*2}));
+        for (int v = 0; v < nsp->height; v++){
+            for (int u = 0; u < nsp->width; u++){
+                olc::Pixel new_colour = MipMaps.back()->GetPixel({u*2, v*2}) * 0.25f;
+                new_colour += MipMaps.back()->GetPixel({u*2+1, v*2  }) * 0.25f;
+                new_colour += MipMaps.back()->GetPixel({u*2,   v*2+1}) * 0.25f;
+                new_colour += MipMaps.back()->GetPixel({u*2+1, v*2+1}) * 0.25f;
+                pge.Draw({u, v}, new_colour);
+            }
+        }
         MipMaps.push_back(nsp);
     }
 

@@ -8,7 +8,6 @@ For now, the tool will pick up any png files placed in `media` and its subdirect
 
 ## Issues
 - Images are assumed to be 1200x1200 pixels
-- Mipmap sampling is overly simplistic and causes an image offset
 - Missing any kind of tool tips/ui for indicating controls and information
 - FPS dramatically drops when in the menu
 - Menu does not allow scrolling for reaching later images
