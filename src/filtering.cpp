@@ -105,7 +105,7 @@ void Texture::draw(olc::PixelGameEngine &pge, olc::TransformedView &tv){
     }
     pge.SetDrawTarget(uint8_t(layer));
     
-    float sf = 1200/ToDraw->sprite->width;
+    float sf = 1200.0f/ToDraw->sprite->width;
 
     tv.DrawDecal({0.0f, 0.0f}, ToDraw, {sf, sf});
     pge.EnableLayer(layer, true);
@@ -172,6 +172,9 @@ bool Filtering::OnUserUpdate(float fElapsedTime){
         texture.movemipmap(1);
     if(GetKey(olc::Key::N).bPressed)
         texture.movemipmap(-1);
+
+    
+    tv.HandlePanAndZoom(0);
 
     explorer.draw(*this);
     texture.draw(*this, tv);
